@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+  bitcoin-chimera:
+    image: registry.digitalocean.com/bitshark-container-repo/test-annual-return:bitcoin-chimera-main
+    environment:
+      - ALGO='bitcoin-chimera'
+      - TRADING_BOTS=bb-reversal-1min-btc-v0_1,new-monthly-high-1mon-btc-v0_1
+    restart: "always"
+    # ports: 
+    #   - "7777"
+
+  new-monthly-high-1mon-btc-v0_1:
+    image: registry.digitalocean.com/bitshark-container-repo/test-annual-return:new-monthly-high-1mon-btc-v0_1
+    environment:
+      - ALGO='new-monthly-high-1mon-btc-chimera-v0_1'
+    restart: "always"
+    # ports: 
+    #   - "7777"
+
+  bb-reversal-1min-btc-v0_1:
+    image: registry.digitalocean.com/bitshark-container-repo/test-annual-return:bb-reversal-1min-btc-v0_1
+    environment:
+      - ALGO='bb-reversal-1min-btc-chimera-v0_1'
+    restart: "always"
+    # ports: 
+    #   - "7777"

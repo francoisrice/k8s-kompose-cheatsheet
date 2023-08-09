@@ -1,0 +1,6 @@
+version: "2"
+
+services:
+  smoke-test:
+    image: sureshotcapital/algo-repo:latest
+    restart: "always"

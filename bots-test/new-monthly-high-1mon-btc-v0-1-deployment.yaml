@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.prod.yml --replicas 3
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: new-monthly-high-1mon-btc-v0-1
+  name: new-monthly-high-1mon-btc-v0-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      io.kompose.service: new-monthly-high-1mon-btc-v0-1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.prod.yml --replicas 3
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: new-monthly-high-1mon-btc-v0-1
+    spec:
+      containers:
+        - env:
+            - name: ALGO
+              value: '''new-monthly-high-1mon-btc-chimera-v0_1'''
+          image: registry.digitalocean.com/bitshark-container-repo/test-annual-return:new-monthly-high-1mon-btc-v0_1
+          name: new-monthly-high-1mon-btc-v0_1
+          resources: {}
+      restartPolicy: Always
+status: {}

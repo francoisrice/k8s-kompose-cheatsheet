@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.prod.yml --replicas 3
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: bb-reversal-1min-btc-v0-1
+  name: bb-reversal-1min-btc-v0-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      io.kompose.service: bb-reversal-1min-btc-v0-1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.prod.yml --replicas 3
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: bb-reversal-1min-btc-v0-1
+    spec:
+      containers:
+        - env:
+            - name: ALGO
+              value: '''bb-reversal-1min-btc-chimera-v0_1'''
+          image: registry.digitalocean.com/bitshark-container-repo/test-annual-return:bb-reversal-1min-btc-v0_1
+          name: bb-reversal-1min-btc-v0_1
+          resources: {}
+      restartPolicy: Always
+status: {}

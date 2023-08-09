@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.prod.yml --replicas 3
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: bitcoin-chimera
+  name: bitcoin-chimera
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      io.kompose.service: bitcoin-chimera
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.prod.yml --replicas 3
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: bitcoin-chimera
+    spec:
+      containers:
+        - env:
+            - name: ALGO
+              value: '''bitcoin-chimera'''
+            - name: TRADING_BOTS
+              value: bb-reversal-1min-btc-v0_1,new-monthly-high-1mon-btc-v0_1
+          image: registry.digitalocean.com/bitshark-container-repo/test-annual-return:bitcoin-chimera-main
+          name: bitcoin-chimera
+          resources: {}
+      restartPolicy: Always
+status: {}
